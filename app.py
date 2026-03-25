@@ -244,30 +244,30 @@ with col2:
         # ===============================
         # SHAP EXPLANATION
         # ===============================
-    st.markdown("### 🧠 Model Explanation (SHAP)")
+        st.markdown("### 🧠 Model Explanation (SHAP)")
 
-try:
-    import shap
+        try:
+           import shap
 
-    explainer = shap.Explainer(model)
-    shap_values = explainer(input_scaled)
+           explainer = shap.Explainer(model)
+           shap_values = explainer(input_scaled)
 
-    # Get predicted class index
-    pred_class = model.predict(input_scaled)[0]
-    class_index = list(model.classes_).index(pred_class)
+         # Get predicted class index
+           pred_class = model.predict(input_scaled)[0]
+           class_index = list(model.classes_).index(pred_class)
 
-    fig, ax = plt.subplots()
+           fig, ax = plt.subplots()
 
-    shap.plots.waterfall(
-        shap_values[0, :, class_index],   # ✅ correct indexing
-        max_display=10,
-        show=False
-    )
+           shap.plots.waterfall(
+            shap_values[0, :, class_index],   # ✅ correct indexing
+            max_display=10,
+            show=False
+                    )
+           st.pyplot(fig)
 
-    st.pyplot(fig)
-
-except Exception as e:
-    st.error(f"SHAP error: {e}")
+        except Exception as e:
+            st.error(f"SHAP error: {e}")
+        
 # ===============================
 # SIDEBAR
 # ===============================
